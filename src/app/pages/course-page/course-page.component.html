@@ -1,0 +1,128 @@
+@if (!isLoadingData()) {
+  <div class="container">
+    <div class="task-info">
+      <div class="task-text" tuiTitle>
+        <div class="course-header">
+          <div class="course-title">
+            <tui-badge
+              [appearance]="isAssignedStatus() ? 'positive' : 'error'"
+              tuiStatus
+              class="task-status"
+            >
+              {{ courseStatusValue() }}
+            </tui-badge>
+            <h2 class="course-name">{{ course()?.name }}</h2>
+          </div>
+          <a [routerLink]="'/courses'">
+            <button tuiButton iconStart="@tui.arrow-big-left" appearance="outline-grayscale">
+              <div class="button-edit-text">Ко всем курсам</div>
+            </button>
+          </a>
+        </div>
+        <div tuiSubtitle class="course-subtitle">{{ course()?.description }}</div>
+
+        <div class="teachers-wrapper">
+          <div>
+            <span tuiTitle="m" class="teachers-title">Преподаватели курса:</span>
+            @if (course()?.teacherUsers?.length) {
+              <div class="teachers">
+                @for (teacher of course()?.teacherUsers; track teacher.uid; let
+                    index = $index) {
+                  <div class="teacher-item">
+                    <span>{{ index + 1 }}.</span>
+                    <a [routerLink]="'/teachers/' + teacher.uid" tuiLink>
+                <span tuiSubtitle tuiAppearance="action" class="teacher-name"
+                >{{ teacher.name }} {{ teacher.surname }}</span
+                >
+                    </a>
+                  </div>
+                }
+              </div>
+            } @else {
+              <div class="no-content-message">
+                Преподаватели на данный курс пока не назначены
+              </div>
+            }
+          </div>
+          @if (isCourseToTeacherAndIsAdminOrTeacher()) {
+            <a [routerLink]="'/courses/' + course()?.uid + '/edit'">
+              <button
+                tuiButton
+                iconStart="@tui.pencil"
+                appearance="outline-destructive"
+              >
+                <div class="button-edit-text">Редактировать</div>
+              </button>
+            </a>
+          } @else if (isUser()) {
+            <button
+              (click)="handleJoin(course()?.uid ?? '')"
+              tuiButton
+              [iconStart]="isJoined() ? '@tui.log-out' : '@tui.plus'"
+              [appearance]="isJoined() ? 'outline-destructive' : 'positive'"
+            >
+              <div class="button-edit-text">
+                {{ isJoined() ? 'Покинуть' : 'Записаться' }}
+              </div>
+            </button>
+          }
+        </div>
+      </div>
+      <div class="task-image">
+        <img
+          [className]="course()?.poster ? 'image' : 'not-found'"
+          [ngSrc]="course()?.poster || notFoundImg" alt="image" fill priority
+        />
+      </div>
+    </div>
+    <div class="section">
+      <div tuiTitle="m">
+        Теоретические задания курса:
+      </div>
+      <span class="line"></span>
+      @if (isCourseToTeacherAndIsAdminOrTeacher()) {
+        <a [routerLink]="'/courses/' + course()?.uid + '/lesson/create'">
+          <button tuiButton iconStart="@tui.plus" appearance="flat">
+            <span class="no-visible"></span>
+          </button>
+        </a>
+      }
+    </div>
+    @if (lessons().length) {
+      <div class="tasks">
+        @for (task of lessons(); track task; let index = $index) {
+          <app-task-unit [task]="task" [index]="index" (handleClick)="handleClickLesson($event)" />
+        }
+      </div>
+    } @else {
+      <div class="no-content-message">На данном курсе пока нет теоретических уроков!</div>
+    }
+
+    <div class="section">
+      <div tuiTitle="m">
+        Практические задания курса:
+      </div>
+      <span class="line"></span>
+      @if (isCourseToTeacherAndIsAdminOrTeacher()) {
+        <a [routerLink]="'/courses/' + course()?.uid + '/task/create'">
+          <button tuiButton iconStart="@tui.plus" appearance="flat">
+            <span class="no-visible"></span>
+          </button>
+        </a>
+      }
+    </div>
+    @if (tasks().length) {
+      <div class="tasks">
+        @for (task of tasks(); track task; let index = $index) {
+          <app-task-unit [task]="task" [index]="index" (handleClick)="handleClickTask($event)" />
+        }
+      </div>
+    } @else {
+      <div class="no-content-message">На данном курсе пока нет задач!</div>
+    }
+  </div>
+} @else {
+  <div class="loader">
+    <tui-loader size="xxl" />
+  </div>
+}

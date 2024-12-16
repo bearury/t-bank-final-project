@@ -1,0 +1,18 @@
+<button
+  (click)="handleClick.emit(task().uid)"
+  class="button"
+  tuiCardLarge="normal"
+  tuiCell="l"
+  tuiSurface="floating"
+  type="button"
+>
+  <tui-avatar
+    [src]="(String(index() + 1) | tuiInitials)"
+    appearance="primary"
+  >{{ index() + 1 }}
+  </tui-avatar>
+  <div class="title" tuiTitle="l">
+    {{ task().name }}
+    <div class="subtitle" tuiSubtitle>{{ task().description }}</div>
+  </div>
+</button>

@@ -1,0 +1,142 @@
+:host {
+  position: relative;
+  width: 100%;
+  min-height: 600px;
+  display: flex;
+  gap: 40px;
+  border: 4px solid transparent;
+  border-image: linear-gradient(
+      45deg,
+      var(--app-linear-gradient-first),
+      var(--app-linear-gradient-second)
+    )
+    1;
+  padding: 30px;
+}
+h3 {
+  line-height: 0.9;
+}
+.teacher__hero {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  gap: 24px;
+}
+.tui-avatar {
+  border-radius: 15px;
+  width: 23.75rem;
+  height: 25rem;
+}
+.teacher__stack {
+  gap: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.description {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+  p {
+    line-height: 1;
+  }
+}
+.teacher__stack-items {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+@media screen and (max-width: 1920px) {
+  .tui-avatar {
+    border-radius: 15px;
+    width: 20rem;
+    height: 18rem;
+  }
+  :host {
+    min-height: 400px;
+    display: flex;
+    gap: 40px;
+    border: 4px solid transparent;
+    border-image: linear-gradient(
+        45deg,
+        var(--app-linear-gradient-first),
+        var(--app-linear-gradient-second)
+      )
+      1;
+    padding: 30px;
+  }
+}
+
+@media screen and (max-width: 1180px) {
+  :host {
+    font-size: 1.8rem;
+    padding: 10px;
+  }
+  .teacher__hero {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 24px;
+  }
+  .tui-avatar {
+    border-radius: 15px;
+    width: 20rem;
+    height: 18rem;
+  }
+  .teacher__stack {
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  .description {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+    p {
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+  }
+  .teacher__stack-items {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  :host {
+    flex-direction: column;
+  }
+  .teacher__hero {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+  }
+  .tui-avatar {
+    border-radius: 15px;
+    width: 15rem;
+    height: 13rem;
+  }
+  .description {
+    gap: 30px;
+    p {
+      font-size: 1.3rem;
+      line-height: 1;
+    }
+  }
+}

@@ -1,0 +1,1 @@
+export const LESSON_EDIT_PAGE_REGEX = /courses\/[\w-]+\/lesson\/[\w-]+\/edit/;

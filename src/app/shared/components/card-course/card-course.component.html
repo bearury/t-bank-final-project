@@ -1,0 +1,31 @@
+<a [routerLink]="'/courses/' + course().uid" class="link">
+  <div
+    class="card"
+    tuiCardLarge
+    tuiHeader
+    tuiSurface="floating"
+  >
+    <div class="image-wrapper">
+      <img [className]="course().poster ? 'image' : 'not-found'" [src]="course().poster || notFoundImg" alt="logo">
+      @if (currentUser()) {
+        <div class="status-wrapper">
+          <tui-badge size="m" class="tag">
+            {{ course() | messageBadgeCourses: currentUser() }}
+          </tui-badge>
+        </div>
+      }
+    </div>
+
+    <div class="content">
+      <div tuiTitle>{{ course().name }}</div>
+      <div tuiSubtitle>Технологии в программе обучения:</div>
+      <div class="stack-wrapper">
+        @for (stack of course().stack; track stack; let index = $index) {
+          <tui-badge size="m" class="stack-badge" [appearance]=setColor(index)>
+            {{ stack }}
+          </tui-badge>
+        }
+      </div>
+    </div>
+  </div>
+</a>

@@ -1,0 +1,22 @@
+<h2>Задания</h2>
+<div class="filters">
+  <tui-segmented>
+    <button type="button" (click)="getHomeworks()">Все</button>
+    <button type="button" (click)="setFilteredHomeworks('rejected')">
+      На доработке
+    </button>
+    <button type="button" (click)="setFilteredHomeworks('approved')">
+      Принятые
+    </button>
+    <button type="button" (click)="setFilteredHomeworks('pending')">
+      На проверке
+    </button>
+  </tui-segmented>
+</div>
+<div class="wrapper container">
+  @if(isTeacher()){ @if( homeworks$ | async; as homework) {
+  <app-homework-teacher [homeworks]="homework"></app-homework-teacher>
+  } } @else{ @if( homeworks$ | async; as homework) {
+  <app-homework-user [homeworks]="homework"></app-homework-user>
+  } }
+</div>

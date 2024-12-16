@@ -1,0 +1,35 @@
+<h2>Наши преподаватели</h2>
+<div class="container">
+  <router-outlet />
+  @if( searchShow() ){
+
+  <tui-input
+    class="search"
+    [formControl]="query"
+    type="text"
+    placeholder="Search"
+  >
+    <tui-icon icon="@tui.search" /> Найти преподавателя
+    <tui-data-list-wrapper
+      class="search"
+      *tuiDataList
+      [items]="names() | tuiFilterByInput"
+    />
+  </tui-input>
+
+  }
+
+  <div class="teachers_container">
+    @for( teacher of teachers$ | async; track teacher.uid ){
+    <app-user-card [teacher]="teacher" [courses]="courses()"></app-user-card>
+    }
+  </div>
+  <tui-loader
+    size="xl"
+    class="loader"
+    [inheritColor]="true"
+    [overlay]="true"
+    [showLoader]="loader()"
+  >
+  </tui-loader>
+</div>

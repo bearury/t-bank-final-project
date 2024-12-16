@@ -1,0 +1,50 @@
+@if (lesson$ | async; as lesson) {
+<div class="lesson">
+  <div class="container">
+    <a
+      [routerLink]="'/courses/' + courseId"
+      iconStart="@tui.arrow-big-left"
+      tuiLink
+      [style.--tui-icon-size.rem]="1.5"
+      class="link-back"
+    >
+      Назад
+    </a>
+
+    <h2 class="lesson-title">{{ lesson['name'] }}</h2>
+
+    <p class="lesson-description">{{ lesson['description'] }}</p>
+
+    @if (lesson['videoLink']) {
+    <div class="lesson-video">
+      <iframe
+        class="iframe"
+        [src]="lesson['videoLink']"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen
+      ></iframe>
+    </div>
+    } @if (lesson['additionalMaterial'].length > 0) {
+    <div class="lesson-additional">
+      <h3 class="lesson-additional-title">
+        Дополнительные материалы для изучения
+      </h3>
+      <ol class="lesson-additional-items">
+        @for (material of lesson['additionalMaterial']; track $index) {
+        <li class="lesson-additional-item">
+          {{ material }}
+        </li>
+        }
+      </ol>
+    </div>
+    } @if (isAdminOrTeacher()) {
+    <div class="lesson-edit">
+      <a appearance="accent" tuiButton [routerLink]="'edit'"> Редактировать </a>
+    </div>
+    }
+  </div>
+</div>
+}

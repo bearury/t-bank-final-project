@@ -1,0 +1,46 @@
+@let task = task$ | async; @let currentUser = currentUser$ | async; @if(task){
+<h2>{{ task.name }}</h2>
+<div tuiAppearance="floating" class="container wrapper">
+  <div class="task__description">
+    <h3>задание:</h3>
+    <span class="task__description-text">
+      {{ task.description }}
+    </span>
+  </div>
+  @if(currentUser?.role === 'user'){
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="task__submit">
+      Ваш новый ответ(прикрепите ссылку):
+      <tui-input
+        formControlName="answerLink"
+        class="tui-input"
+        tuiTextfieldSize="l"
+      >
+        Ответ
+        <input tuiTextfieldLegacy type="text" />
+      </tui-input>
+      <tui-error
+        formControlName="answerLink"
+        [error]="[] | tuiFieldError | async"
+      />
+    </div>
+    <div class="task__submit">
+      Комментарий
+      <tui-input
+        formControlName="comment"
+        class="tui-input"
+        tuiTextfieldSize="l"
+      >
+        Ответ
+        <input tuiTextfieldLegacy type="text" />
+      </tui-input>
+      <tui-error
+        formControlName="comment"
+        [error]="[] | tuiFieldError | async"
+      />
+    </div>
+    <button type="submit" appearance="primary" tuiButton>отправить</button>
+  </form>
+  }
+</div>
+}

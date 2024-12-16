@@ -1,0 +1,161 @@
+<div class="course-form">
+  <div class="container">
+    <a
+      [routerLink]="'/courses/' + id"
+      iconStart="@tui.arrow-big-left"
+      tuiLink
+      [style.--tui-icon-size.rem]="1.5"
+      class="link-back"
+    >
+      Назад
+    </a>
+
+    <h2 class="course-title">{{ courseTitle }}</h2>
+
+    <form [formGroup]="form" class="form" (ngSubmit)="submit()">
+      <div class="name-field">
+        <tui-input formControlName="name">
+          Название курса
+          <input tuiTextfieldLegacy type="text" />
+        </tui-input>
+
+        <tui-error
+          formControlName="name"
+          [error]="[] | tuiFieldError | async"
+        />
+      </div>
+
+      <div class="description-field">
+        <tui-textarea formControlName="description" class="field-large"
+          >Описание курса</tui-textarea
+        >
+      </div>
+
+      <div class="file-field">
+        @if (!form.get('poster')?.value) {
+        <label tuiInputFiles>
+          <input accept="image/*" tuiInputFiles formControlName="poster" />
+        </label>
+        }
+        <tui-files>
+          @if (form.get('poster')!.value | tuiFileRejected : { accept: 'image/*'
+          } | async; as file) {
+          <tui-file state="error" [file]="file" (remove)="removeFile()" />
+          } @if (loadedFiles$ | async; as file) {
+          <tui-file size="l" [file]="file" (remove)="removeFile()" />
+          } @if (failedFiles$ | async; as file) {
+          <tui-file state="error" [file]="file" (remove)="removeFile()" />
+          } @if (loadingFiles$ | async; as file) {
+          <tui-file state="loading" [file]="file" (remove)="removeFile()" />
+          }
+        </tui-files>
+      </div>
+
+      <div class="poster-field">
+        @if (posterSrc) {
+        <div class="close-poster">
+          <button
+            appearance="glass"
+            tuiButtonClose
+            tuiIconButton
+            type="button"
+            (click)="removeFile()"
+          >
+            Close
+          </button>
+        </div>
+        <img [src]="posterSrc" class="poster-preview" alt="poster preview" />
+        } @else {
+        <p>Изображение отсутствует</p>
+        }
+      </div>
+
+      <div class="teachers-field">
+        <label for="">
+          Выберите преподавателей:
+          <tui-multi-select
+            *tuiLet="items$ | async as items"
+            formControlName="teachers"
+            [rows]="1"
+            [stringify]="getTeacherName"
+            [tuiTextfieldLabelOutside]="true"
+            (searchChange)="onSearchChange($event)"
+          >
+            Преподаватели
+            <tui-data-list-wrapper
+              *tuiDataList
+              [itemContent]="itemContent"
+              [items]="items | tuiHideSelected"
+            />
+          </tui-multi-select>
+        </label>
+
+        <ng-template #itemContent let-data>
+          <div class="template">
+            <tui-avatar
+              size="xs"
+              class="avatar"
+              [src]="data.avatar || (data.name | tuiInitials)"
+            />
+            {{ getTeacherName(data) }}
+          </div>
+        </ng-template>
+      </div>
+
+      <div class="stack-field">
+        <label for="stack-input">
+          Перечислите стек через запятую:
+          <tui-input formControlName="stack" [tuiTextfieldLabelOutside]="true">
+            Стек
+            <input tuiTextfieldLegacy type="text" id="stack-input" />
+          </tui-input>
+        </label>
+      </div>
+
+      <div class="status-field">
+        <label tuiLabel>
+          <input formControlName="status" tuiCheckbox type="checkbox" />
+          Доступен
+        </label>
+      </div>
+
+      <div class="form-actions">
+        <button
+          size="l"
+          tuiButton
+          type="submit"
+          class="tui-form__button"
+          [loading]="loading()"
+        >
+          Сохранить
+        </button>
+
+        <button
+          appearance="neutral"
+          size="l"
+          tuiButton
+          type="button"
+          class="tui-form__button"
+          (click)="cancel()"
+          [loading]="loading()"
+        >
+          Отменить
+        </button>
+
+        @if (this.id) {
+        <button
+          appearance="accent"
+          size="l"
+          tuiButton
+          type="button"
+          class="tui-form__button"
+          (click)="delete()"
+          [loading]="loading()"
+        >
+          Удалить
+        </button>
+        }
+      </div>
+    </form>
+  </div>
+</div>

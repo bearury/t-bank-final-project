@@ -1,0 +1,60 @@
+@import '@taiga-ui/core/styles/taiga-ui-local.less';
+:host {
+  display: block;
+}
+.card__wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+span {
+  text-align: center;
+}
+.homework__card {
+  box-sizing: border-box; /* Учитываем отступы и границы */
+  flex: 1 1 300px;
+  max-width: 300px;
+  max-height: 382px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.card__header {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.comment__text {
+  .scrollbar-hidden();
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+  inline-size: 15rem;
+  max-height: 150px;
+  font: var(--tui-font-text-l);
+  height: 100%;
+  overflow: auto;
+}
+.comment__head {
+  font-size: var(--tui-font-text-xl);
+}
+.answer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.comment {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0;
+  align-items: center;
+}
+[tuiCardLarge][data-space]:not([tuiCell], [tuiHeader])
+  > :last-child:not([tuiCell]) {
+  margin-top: 0;
+}

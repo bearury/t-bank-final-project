@@ -1,0 +1,133 @@
+@if (task$ | async; as task) {
+<div class="task">
+  <div class="container">
+    <a
+      [routerLink]="'/courses/' + courseId"
+      iconStart="@tui.arrow-big-left"
+      tuiLink
+      [style.--tui-icon-size.rem]="1.5"
+      class="link-back"
+    >
+      Назад
+    </a>
+
+    <div class="task-info">
+      <div class="task-text">
+        <div class="task-name">
+          <tui-badge
+            [appearance]="currentStatus.appearance"
+            tuiStatus
+            class="task-status"
+          >
+            {{ currentStatus.text }}
+          </tui-badge>
+          <h2 class="task-title">{{ task['name'] }}</h2>
+        </div>
+
+        <div>{{ task['description'] }}</div>
+
+        @if (isAdmin || (isTeacher$ | async)) {
+        <div class="task-edit">
+          <a
+            class="link-to-edit"
+            appearance="accent"
+            tuiButton
+            [routerLink]="'edit'"
+            [loading]="loading()"
+          >
+            Редактировать
+          </a>
+        </div>
+        }
+      </div>
+      <div class="task-image">
+        <img src="/homework.webp" alt="homework image" />
+      </div>
+    </div>
+
+    <div>
+      <form [formGroup]="homeworkForm" (ngSubmit)="submit()">
+        <div class="task-answer-field">
+          <h2 class="task-title">Решение</h2>
+          <label tuiLabel
+            >Здесь вы можете отправить свое решение на проверку (можно вставить
+            ссылку на репозиторий с проектом)
+            <tui-input formControlName="answerLink">
+              Ваше решение
+              <input tuiTextfieldLegacy type="text" />
+            </tui-input>
+
+            <tui-error
+              formControlName="answerLink"
+              [error]="[] | tuiFieldError | async"
+            />
+          </label>
+        </div>
+
+        <div class="task-answer-field">
+          <h3 class="task-title">Преподаватель</h3>
+          <tui-select
+            *tuiLet="teachers$ | async as items"
+            [valueContent]="items ? stringify(items) : loading"
+            formControlName="teacherId"
+          >
+            Выберите преподавателя
+            <ng-template tuiDataList>
+              @if (items) {
+              <tui-data-list>
+                @for (item of items; track $index) {
+                <button tuiOption type="button" [value]="item.uid">
+                  <tui-avatar
+                    size="xs"
+                    class="avatar"
+                    [src]="item.avatar || (item.name | tuiInitials)"
+                  />
+                  {{ getTeacherName(item) }}
+                </button>
+                }
+              </tui-data-list>
+              } @else { loading }
+            </ng-template>
+            <ng-template #loading>
+              <tui-loader class="tui-space_vertical-3 loader" />
+            </ng-template>
+          </tui-select>
+          <tui-error
+            formControlName="teacherId"
+            [error]="[] | tuiFieldError | async"
+          />
+        </div>
+
+        <div class="task-answer-field">
+          <h3 tuiTitle class="task-title">Комментарий</h3>
+          <label tuiLabel
+            >Здесь вы можете отправить комментарий для преподавателя
+            <tui-textarea formControlName="comment">Комментарий</tui-textarea>
+          </label>
+        </div>
+
+        @if (teacherReview) {
+        <div class="task-review-field">
+          <h3 tuiTitle class="task-title">Комментарий преподавателя</h3>
+          <label tuiLabel
+            >Здесь вы можете увидеть комментарий преподавателя
+            <tui-textarea formControlName="review"
+              >Комментарий преподавателя</tui-textarea
+            >
+          </label>
+        </div>
+        }
+
+        <button
+          tuiButton
+          type="submit"
+          [loading]="loading()"
+          [disabled]="this.homeworkForm.disabled"
+        >
+          Отправить
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+}

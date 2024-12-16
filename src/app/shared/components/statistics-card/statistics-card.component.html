@@ -1,0 +1,16 @@
+<div class="statistics-card">
+  <div class="statistics-card-value">
+    <svg class="statistics-card-value-svg" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="linear" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="var(--app-linear-gradient-first)" />
+          <stop offset="100%" stop-color="var(--app-linear-gradient-second)" />
+        </linearGradient>
+      </defs>
+      <text x="0%" y="0%" class="gradient">{{ value }}</text>
+    </svg>
+  </div>
+  <div class="statistics-card-units">
+    {{ value | i18nPlural : unitsMapping }}
+  </div>
+</div>

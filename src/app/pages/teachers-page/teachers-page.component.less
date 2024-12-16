@@ -1,0 +1,57 @@
+:host {
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  font-size: 2rem;
+}
+
+h2 {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  line-height: 0.9;
+}
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 40px;
+  padding-top: 20px;
+  margin-bottom: 30px;
+}
+
+.loader {
+  position: absolute;
+  top: 50%;
+  right: 45%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+}
+.teachers_container {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.search {
+  min-width: 300px;
+}
+
+@media screen and (max-width: 800px) {
+  h2 {
+    font-size: 2.8rem;
+    padding-bottom: px;
+  }
+  .container {
+    padding-top: 0;
+  }
+}
+
+@media screen and (max-width: 595px) {
+  h2 {
+    font-size: 2rem;
+  }
+}

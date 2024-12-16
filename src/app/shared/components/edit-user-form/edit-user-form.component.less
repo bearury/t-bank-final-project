@@ -1,0 +1,42 @@
+form {
+  display: flex;
+  justify-content: center;
+
+  flex-direction: column;
+  gap: 20px;
+}
+
+.photo-area {
+  display: flex;
+  justify-content: center;
+  justify-content: space-around;
+  gap: 30px;
+}
+.avatar {
+  width: 300px;
+  height: 200px;
+}
+.photo__area-upload {
+  height: 100%;
+}
+.photo__area_upload-input {
+  height: 200px;
+}
+.file {
+  height: 200px;
+  max-width: 414px;
+}
+@media screen and (max-width: 769px) {
+  .photo-area {
+    display: flex;
+    justify-content: center;
+    justify-content: space-around;
+    flex-direction: column;
+    gap: 30px;
+  }
+  .avatar {
+    align-self: center;
+    width: 300px;
+    height: 200px;
+  }
+}

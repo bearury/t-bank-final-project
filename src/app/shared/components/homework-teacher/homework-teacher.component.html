@@ -1,0 +1,116 @@
+<table class="table" tuiTable>
+  <thead>
+    <tr>
+      <th tuiTh>ученик</th>
+      <th tuiTh>урок</th>
+      <th tuiTh>ответ</th>
+      <th tuiTh>дата</th>
+      <th tuiTh>комментарий</th>
+      <th tuiTh>статус</th>
+    </tr>
+  </thead>
+  <tbody tuiTbody>
+    @for(homework of homeworks; track homework.uid){
+    <tr>
+      <td tuiTd>{{ homework.userName }}</td>
+      <td tuiTd>
+        <a
+          tuiLink
+          class="link"
+          [routerLink]="
+            '/profile/homework/task/' + homework.taskId + '/' + homework.uid
+          "
+          >{{ homework.taskName }}</a
+        >
+      </td>
+      <td tuiTd>
+        <a tuiLink target="_blank" [href]="homework.answerLink">{{
+          homework.answerLink
+        }}</a>
+      </td>
+      <td tuiTd>{{ homework.dateSubmitted | showData }}</td>
+      <td [tuiHint]="tooltip" tuHi class="comment__item" tuiTd>
+        {{ homework.comment }}
+      </td>
+      <ng-template #tooltip>
+        {{ homework.comment }}
+      </ng-template>
+      <td class="status__item" tuiTd>
+        <tui-chip [appearance]="homework.status | changeAppearance">{{
+          homework.status | changeStatusName
+        }}</tui-chip>
+
+        <div class="review__icon">
+          <tui-icon
+            (click)="
+              setComment(homework.review); showModal(content, header, 'l')
+            "
+            icon="@tui.square-pen"
+            [style.color]="'var(--tui-background-accent-2)'"
+          >
+          </tui-icon>
+        </div>
+      </td>
+    </tr>
+
+    <ng-template #content let-observer>
+      <p>(При оценке оставляйте подробное ревью и будьте объективным)</p>
+      <tui-loader
+        [inheritColor]="true"
+        [overlay]="true"
+        [showLoader]="disable()"
+      >
+        <form [formGroup]="form" class="form">
+          <div class="form__info">
+            <span>Ссылка на задание:</span>
+            <a
+              tuiLink
+              [routerLink]="
+                '/profile/homework/task/' + homework.taskId + '/' + homework.uid
+              "
+              (click)="observer.complete()"
+              >задание</a
+            >
+          </div>
+          <div class="form__info">
+            <span>Ответ:</span>
+            <a tuiLink target="_blank" [href]="homework.answerLink">
+              {{ homework.answerLink }}</a
+            >
+          </div>
+          <p class="form__text">Ваше ревью:</p>
+          <tui-textarea formControlName="comment" class="text-area">
+          </tui-textarea>
+          <div class="buttons">
+            <button
+              style="border: 1px solid var(--tui-background-accent-1)"
+              size="m"
+              tuiButton
+              type="button"
+              (click)="submit(homework.uid, observer, 'approved')"
+            >
+              Принять
+            </button>
+            <button
+              style="border: 1px solid var(--tui-background-accent-2)"
+              size="m"
+              tuiButton
+              type="button"
+              (click)="submit(homework.uid, observer, 'rejected')"
+            >
+              Переделать
+            </button>
+          </div>
+        </form>
+      </tui-loader>
+    </ng-template>
+
+    <ng-template #header>
+      <div class="header">
+        <img alt="owl" src="owl.png" />
+      </div>
+    </ng-template>
+
+    }
+  </tbody>
+</table>

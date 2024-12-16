@@ -1,0 +1,84 @@
+<div class="task-form">
+  <div class="container">
+    <a
+      [routerLink]="'/courses/' + courseId + (id ? '/task/' + id : '')"
+      iconStart="@tui.arrow-big-left"
+      tuiLink
+      [style.--tui-icon-size.rem]="1.5"
+      class="link-back"
+    >
+      Назад
+    </a>
+
+    <h2 class="task-title">{{ taskTitle }}</h2>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="form">
+      <div class="form-field">
+        <tui-input formControlName="name">
+          Название задания
+          <input tuiTextfieldLegacy type="text" />
+        </tui-input>
+
+        <tui-error
+          formControlName="name"
+          [error]="[] | tuiFieldError | async"
+        />
+      </div>
+      <div class="form-field">
+        <tui-textarea
+          formControlName="description"
+          [expandable]="true"
+          class="field-large"
+          >Текст задания</tui-textarea
+        >
+
+        <tui-error
+          formControlName="description"
+          [error]="[] | tuiFieldError | async"
+        />
+      </div>
+
+      <div class="form-field">
+        <tui-input-date formControlName="deadline">
+          Выберите дату дедлайна
+        </tui-input-date>
+
+        <tui-error
+          formControlName="deadline"
+          [error]="[] | tuiFieldError | async"
+        />
+      </div>
+
+      <div class="form-action">
+        <button
+          tuiButton
+          type="submit"
+          class="form-submit"
+          [loading]="loading()"
+        >
+          Сохранить
+        </button>
+        <button
+          appearance="neutral"
+          tuiButton
+          type="button"
+          (click)="cancel()"
+          [loading]="loading()"
+        >
+          Отменить
+        </button>
+        @if (id) {
+        <button
+          appearance="accent"
+          tuiButton
+          type="button"
+          (click)="delete()"
+          [loading]="loading()"
+        >
+          Удалить
+        </button>
+        }
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,83 @@
+<div class="wrapper">
+  <div class="navigation">
+    <a routerLink="/login" routerLinkActive="active">Вход</a>
+    <a routerLink="/signup" routerLinkActive="active">Регистрация</a>
+  </div>
+  <div class="form-wrapper">
+    <form (ngSubmit)="onSubmit()" [formGroup]="form" class="form">
+      @if (form.controls) {
+        <div>
+          <tui-textfield>
+            <label for="email" tuiLabel>Введите почту</label>
+            <input [formControl]="form.controls.email"
+                   id="email"
+                   tuiTextfield
+                   type="text"
+            />
+          </tui-textfield>
+          <tui-error
+            [error]="[] | tuiFieldError | async"
+            [formControl]="form.controls.email"
+            class="error-message"
+          />
+        </div>
+        <div>
+          <tui-textfield>
+            <label for="password" tuiLabel>Введите пароль</label>
+            <input [formControl]="form.controls.password"
+                   [type]="isPasswordFieldTextType() ? 'password' : 'text'"
+                   id="password"
+                   tuiTextfield
+            />
+            <button (click)="togglePasswordFieldTextType()" class="button-eye" type="button">
+              <tui-icon
+                [style.color]="'gray'"
+                icon="@tui.eye"
+              />
+            </button>
+          </tui-textfield>
+          <tui-error
+            [error]="[] | tuiFieldError | async"
+            [formControl]="form.controls.password"
+            class="error-message"
+          />
+        </div>
+        <div *ngIf="form.controls.name">
+          <tui-textfield>
+            <label for="name" tuiLabel>Введите имя</label>
+            <input [formControl]="form.controls.name"
+                   id="name"
+                   tuiTextfield
+                   type="text"
+            />
+          </tui-textfield>
+          <tui-error
+            [error]="[] | tuiFieldError | async"
+            [formControl]="form.controls.name"
+            class="error-message"
+          />
+
+        </div>
+      }
+      <button [loading]="loading()" appearance="accent" tuiButton type="submit">{{ isLoginRoute() ? 'Вход' : 'Регистрация' }}</button>
+      <button (click)="onRegisterForEmail()" [loading]="loading()" appearance="positive" tuiButton type="button">{{ isLoginRoute() ? 'Вход' : 'Регистрация' }} по почте</button>
+    </form>
+    <div class="group">
+      <div class="dialog">
+        <div class="dialog">
+          <img
+            [ngSrc]="'/svg/dialog.svg' | tuiIcon"
+            [style.height.px]="150"
+            [style.width.px]="250"
+            alt="icon"
+            class="svg"
+            fill
+            priority
+          />
+          <span>Войдите в систему или зарегистрируйтесь, если у вас ещё нет аккаунта</span>
+        </div>
+      </div>
+      <img [ngSrc]="image" alt="icon" height="188" priority width="168">
+    </div>
+  </div>
+</div>

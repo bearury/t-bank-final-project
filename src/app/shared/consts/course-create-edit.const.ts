@@ -1,0 +1,1 @@
+export const COUSRE_EDIT_PAGE_REGEX = /\/courses\/[\w-]+\/edit/;

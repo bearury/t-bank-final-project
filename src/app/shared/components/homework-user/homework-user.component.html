@@ -1,0 +1,47 @@
+<div class="container card__wrapper">
+  @for (homework of homeworks; track homework.uid) {
+  <div tuiAppearance="floating" tuiCardLarge class="homework__card">
+    <header tuiHeader>
+      <div class="card__header">
+        <span tuiTitle>{{ homework.taskName }}</span>
+        <tui-chip
+          [appearance]="homework.status | changeAppearance"
+          class="chip"
+          size="s"
+          >{{ homework.status | changeStatusName }}</tui-chip
+        >
+      </div>
+    </header>
+    <div class="answer">
+      <span
+        >ваш ответ:
+        <a tuiLink target="_blank" [href]="homework.answerLink">ссылка</a>
+      </span>
+    </div>
+    <div class="comment">
+      <span class="comment__head" tuiSubtitle
+        >комментарий от преподавателя:</span
+      >
+      <tui-scrollbar>
+        <div tuiFade="vertical" tuiScrollable class="comment__text fade">
+          {{ homework.review }}
+        </div>
+      </tui-scrollbar>
+    </div>
+    @if(homework.status === 'rejected'){
+    <a
+      class="link"
+      [routerLink]="
+        '/profile/homework/task/' + homework.taskId + '/' + homework.uid
+      "
+      tuiButton
+      appearance="warning"
+      size="s"
+      >доработать</a
+    >
+    } @else {
+    <span>{{ homework.dateSubmitted | showData }}</span>
+    }
+  </div>
+  }
+</div>

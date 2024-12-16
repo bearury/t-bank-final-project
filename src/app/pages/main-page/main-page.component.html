@@ -1,0 +1,81 @@
+<div class="main">
+  <section class="main-slide">
+    <div class="main-slide-image">
+      <img
+        src="/main-slide.webp"
+        alt="girl with laptop"
+        class="main-slide-img"
+      />
+    </div>
+    <div class="main-slide-dotted"></div>
+    <div class="container main-container">
+      <h1 class="main-title">
+        <span>Образовательная платформа</span>
+        <span>ХОД Future Academy</span>
+      </h1>
+      <p class="main-subtitle">
+        Актуальные знания для новичков и профессионалов
+      </p>
+    </div>
+  </section>
+
+  <section class="main-video">
+    <div class="container">
+      <div class="main-video-content">
+        <iframe
+          width="100%"
+          height="100%"
+          src="https://www.youtube.com/embed/TPwfnuiPylM"
+          title="Бесплатная неделя занятий в «Онлайн-школе»"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section class="statistics">
+    <div class="container">
+      <p class="statistics-text">
+        Актуальные знания от признанных экспертов рынка для новичков и
+        практикующих специалистов.
+      </p>
+
+      <div class="statistics-items">
+        @for (statisticsItem of statisticsItems; track $index) {
+        <div class="statistics-item">
+          @if (statisticsItem.amount | async; as amount) {
+          <app-statistics-card
+            [value]="amount"
+            [units]="statisticsItem.units"
+          ></app-statistics-card>
+          }
+        </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="advantages">
+    <div class="container">
+      <h3 class="advantages-title">Добро пожаловать в Академию будущего ХОД</h3>
+      <div class="advantages-items">
+        @for (advantage of advantages; track $index) {
+        <div class="advantage-item">
+          <div class="advantage-icon">
+            <img
+              [ngSrc]="advantage.svg | tuiIcon"
+              fill
+              priority
+              alt="advantage icon"
+            />
+          </div>
+          <div class="advantage-text">{{ advantage.text }}</div>
+        </div>
+        }
+      </div>
+    </div>
+  </section>
+</div>

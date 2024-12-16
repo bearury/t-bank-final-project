@@ -1,0 +1,1 @@
+export const TASK_EDIT_PAGE_REGEX = /courses\/[\w-]+\/task\/[\w-]+\/edit/;

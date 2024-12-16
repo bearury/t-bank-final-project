@@ -1,0 +1,32 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - '**'
+  workflow_dispatch:
+
+jobs:
+  lint_and_test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4 # Клонируем репозиторий
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20' # Укажите версию Node.js, которую вы используете
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Nx CLI
+        run: npm install -g nx # Установка nx глобально
+
+      - name: Run linter
+        run: npx eslint src
+
+      - name: Run tests
+        run: nx test --skip-nx-cache

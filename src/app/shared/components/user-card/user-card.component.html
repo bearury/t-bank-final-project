@@ -1,0 +1,31 @@
+@if(teacher){
+<a class="link" routerLinkActive="active-link" routerLink="{{ teacher.uid }}">
+  <div class="teacher__card" tuiAppearance="neutral" tuiCardMedium>
+    <div class="teacher__card-hero">
+      <div class="teacher__card-hero_name">
+        <tui-avatar
+          class="teacher__avatar pb20"
+          src="{{ teacher.avatar | showImage }}"
+        ></tui-avatar>
+        <div class="teacher__name-container">
+          <p class="pb10" tuiTitle>{{ teacher.name | titlecase }}</p>
+          <p class="subtitle" tuiSubtitle>{{ teacher.surname | titlecase }}</p>
+        </div>
+      </div>
+      <div class="teacher__stack-wrapper">
+        <span tuiSurface><strong> преподает на курсах:</strong></span>
+        <div class="teacher__courses-container">
+          @for(courseID of teacher.courses; track $index){
+          <tui-badge
+            style="padding: 0.7rem"
+            class="teacher__courses-container_item"
+            [appearance]="setColorBadge(courseID)"
+            >{{ courseID | transformCourseToName : courses }}
+          </tui-badge>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</a>
+}

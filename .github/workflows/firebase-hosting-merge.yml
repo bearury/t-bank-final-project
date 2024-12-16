@@ -1,0 +1,30 @@
+name: Deploy to Firebase Hosting on merge
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Nx CLI
+        run: npm install -g nx # Устанавливаем Nx глобально
+
+      - name: Build project
+        run: nx build --skip-nx-cache
+
+      - name: Deploy to Firebase
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_FINALPROJECT_A49E6 }}
+          channelId: live
+          projectId: finalproject-a49e6

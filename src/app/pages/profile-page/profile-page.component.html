@@ -1,0 +1,103 @@
+<h2 class="profile-title">Профиль</h2>
+<div class="wrapper container">
+  @if(currentUser$ | async; as user){
+  <div class="profile_header block">
+    <div class="div__header-hero">
+      <tui-avatar
+        class="profile_header-avatar"
+        src="{{ user.avatar | showImage }}"
+      ></tui-avatar>
+      <p class="profile__header-name">{{ user.name + ' ' + user.surname }}</p>
+    </div>
+
+    <div class="profile__header-contacts">
+      <p>
+        <strong>Телефон:</strong>
+        {{ user.phone | showPhone }}
+      </p>
+      <p>
+        <strong>Email:</strong>
+        {{ user.email }}
+      </p>
+    </div>
+  </div>
+
+  <div class="profile__courses block">
+    <h2 class="profile__courses-title">Курсы</h2>
+    <div class="profile__courses-container">
+      @for(course of courses(); track course.uid){
+      <a
+        tuiHintDirection="right"
+        [tuiHint]="aboutcourse"
+        class="link"
+        [routerLink]="['/courses/' + course.uid]"
+        routerLinkActive="router-link-active"
+      >
+        <tui-badge
+          style="padding: 1.3rem"
+          class="profile__courses-container_item"
+          [appearance]="setColorBadge(course.uid)"
+        >
+          {{ course.name }}
+        </tui-badge>
+        <ng-template #aboutcourse>
+          <p>{{ course.description }}</p>
+        </ng-template>
+      </a>
+      }
+    </div>
+    <p>О себе</p>
+    <p class="about-text">{{ user.description }}</p>
+    <button class="change-button" tuiButton (click)="showEditForm()">
+      изменить профиль
+    </button>
+    <tui-icon
+      size="l"
+      tuiHintDirection="right"
+      [tuiHint]="tooltip"
+      class="link logout"
+      (click)="showExitDialog()"
+      icon="@tui.log-out"
+      [style.color]="'var(--tui-background-accent-1)'"
+    />
+  </div>
+  }
+
+  <ng-template
+    let-observer
+    [tuiDialogOptions]="{ label: 'Редактирование профиля', size: 'l' }"
+    [(tuiDialog)]="openEditForm"
+  >
+    <app-edit-user-form (closeDialogEvent)="closeFormDialog()" />
+  </ng-template>
+
+  <ng-template
+    let-observer
+    [tuiDialogOptions]="{ label: 'вы уверены?', size: 's' }"
+    [(tuiDialog)]="openLogoutDialog"
+  >
+    <div
+      style="
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+      "
+    >
+      <button (click)="signOut()" size="l" tuiButton style="margin-top: 15px">
+        да
+      </button>
+    </div>
+  </ng-template>
+
+  <ng-template #tooltip>
+    <p><strong>Выйти из аккаунта</strong></p>
+  </ng-template>
+</div>
+<tui-loader
+  size="xl"
+  class="loader"
+  [inheritColor]="true"
+  [overlay]="true"
+  [showLoader]="loader()"
+></tui-loader>

@@ -1,0 +1,73 @@
+<tui-loader [inheritColor]="true" [overlay]="true" [showLoader]="disabled()">
+  <form (ngSubmit)="onSubmit()" [formGroup]="form">
+    <tui-input formControlName="name">имя</tui-input>
+    <tui-input formControlName="surname">фамилия</tui-input>
+    <tui-input-phone formControlName="phone"
+      >телефон <input autocomplete="tel" tuiTextfieldLegacy
+    /></tui-input-phone>
+
+    <div class="photo-area">
+      <tui-avatar class="avatar" src="{{ avatar() | showImage }}"></tui-avatar>
+
+      <div class="photo__area-upload">
+        <label
+          class="photo__area_upload-input"
+          *ngIf="!form.get('file')?.value"
+          tuiInputFiles
+        >
+          <input accept="image/*" tuiInputFiles formControlName="file" />
+        </label>
+
+        <tui-files class="input-file">
+          <tui-file
+            class="file"
+            *ngIf="
+              form.value.file &&
+              (form.value.file
+                | tuiFileRejected : { accept: 'image/*' }
+                | async) as file
+            "
+            state="error"
+            [file]="file"
+            (remove)="removeFile()"
+          />
+
+          <tui-file
+            class="file"
+            *ngIf="loadedFiles$ | async as file"
+            [file]="file"
+            (remove)="removeFile()"
+          />
+
+          <tui-file
+            class="file"
+            *ngIf="failedFiles$ | async as file"
+            state="error"
+            [file]="file"
+            (remove)="removeFile()"
+          />
+
+          <tui-file
+            class="file"
+            *ngIf="loadingFiles$ | async as file"
+            state="loading"
+            [file]="file"
+            (remove)="removeFile()"
+          />
+        </tui-files>
+      </div>
+    </div>
+
+    <tui-textarea formControlName="description">Описание</tui-textarea>
+    <button
+      [disabled]="!form.valid || disabled()"
+      type="submit"
+      class="input edit-button"
+      size="xl"
+      appearance="outline"
+      tuiButton
+    >
+      изменить
+    </button>
+  </form>
+</tui-loader>

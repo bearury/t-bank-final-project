@@ -1,0 +1,94 @@
+@import '@taiga-ui/core/styles/taiga-ui-local.less';
+
+.link {
+  width: 100%;
+  height: 100%;
+}
+
+
+.card {
+  height: 100%;
+  padding: 0 !important;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+
+  box-shadow: var(--tui-shadow-popup);
+  transition-duration: var(--tui-duration, .3s);
+  transition-timing-function: ease-in-out;
+  transition-property: transform, box-shadow;
+  will-change: transform, box-shadow;
+  background: var(--tui-elevation-02);
+
+
+  &:hover {
+    box-shadow: var(--tui-shadow-small-hover);
+    transform: translateY(-.2rem);
+  }
+
+
+  .image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 43%;
+    overflow: hidden;
+    background-color: var(--tui-base-02);
+    box-shadow: var(--tui-shadow-small);
+
+    img {
+      position: absolute;
+    }
+
+    .image {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      opacity: .8;
+    }
+
+
+    .not-found {
+      object-fit: initial !important;
+      height: auto !important;
+      width: 30% !important;
+      top: 50% !important;
+      left: 50% !important;
+      transform: translate(-50%, -50%) !important;
+    }
+
+    .status-wrapper {
+      position: absolute;
+      top: 5%;
+      left: 5%;
+
+      .tag {
+        .gradient(var(--app-linear-gradient-first), var(--app-linear-gradient-second), 60deg);
+        box-shadow: 5px 5px 10px var(--tui-background-accent-opposite);
+        padding: 0.6rem 1rem;
+        font-size: .8rem;
+        font-weight: bold;
+      }
+    }
+  }
+
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    min-height: 0;
+    padding: 20px 24px 24px;
+    gap: 1rem;
+
+    .stack-wrapper {
+      display: flex;
+      gap: 1rem;
+
+      .stack-badge {
+        padding: .6rem 1rem;
+      }
+    }
+  }
+}

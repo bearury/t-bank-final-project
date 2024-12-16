@@ -1,0 +1,147 @@
+<div class="lesson">
+  <div class="container">
+    <a
+      [routerLink]="'/courses/' + courseId + (id ? '/lesson/' + id : '')"
+      iconStart="@tui.arrow-big-left"
+      tuiLink
+      [style.--tui-icon-size.rem]="1.5"
+      class="link-back"
+    >
+      Назад
+    </a>
+
+    <h2 class="lesson-title">
+      {{ lessonTitle }}
+    </h2>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="form">
+      <div class="form-field">
+        <tui-input formControlName="name">
+          Название лекции
+          <input tuiTextfieldLegacy type="text" />
+        </tui-input>
+
+        <tui-error
+          formControlName="name"
+          [error]="[] | tuiFieldError | async"
+        />
+      </div>
+      <div class="form-field">
+        <tui-textarea
+          formControlName="description"
+          [expandable]="true"
+          class="field-large"
+          >Описание лекции</tui-textarea
+        >
+
+        <tui-error
+          formControlName="description"
+          [error]="[] | tuiFieldError | async"
+        />
+      </div>
+
+      <div class="form-field">
+        <tui-input formControlName="videoLink">
+          Ссылка на видео
+          <input tuiTextfieldLegacy type="text" />
+        </tui-input>
+      </div>
+
+      <div class="form-field">
+        <tui-input-date formControlName="deadline">
+          Выберите дату дедлайна
+        </tui-input-date>
+
+        <tui-error
+          formControlName="deadline"
+          [error]="[] | tuiFieldError | async"
+        />
+      </div>
+
+      <ng-container formArrayName="additionalMaterial">
+        <div class="form-field">
+          <div class="additonal-material-add">
+            <h3 tuiTitle class="additional-material-title">
+              Дополнительные материалы для изучения
+            </h3>
+            <button
+              tuiIconButton
+              iconStart="@tui.plus"
+              size="xs"
+              type="button"
+              (click)="addInput()"
+            >
+              Add
+            </button>
+          </div>
+
+          <div class="additional-material-items">
+            @for (item of additionalMaterial.controls; track $index; let i =
+            $index) {
+            <div class="additional-material-item">
+              <label
+                tuiLabel
+                for="input-{{ i }}"
+                class="additional-material-label"
+              >
+                <tui-input formControlName="{{ i }}">
+                  Доп. материал {{ i + 1 }}
+                  <input
+                    tuiTextfieldLegacy
+                    id="input-{{ i }}"
+                    type="text"
+                    [value]="item.value"
+                  />
+                </tui-input>
+              </label>
+              <button
+                tuiIconButton
+                iconStart="@tui.trash-2"
+                size="xs"
+                type="button"
+                (click)="deleteInput(i)"
+              >
+                Delete
+              </button>
+            </div>
+            }
+          </div>
+        </div>
+      </ng-container>
+
+      <div class="form-action">
+        <button
+          tuiButton
+          type="submit"
+          class="form-button"
+          [loading]="loading()"
+        >
+          Сохранить
+        </button>
+        <button
+          appearance="neutral"
+          tuiButton
+          type="button"
+          class="form-button"
+          (click)="cancel()"
+          [loading]="loading()"
+        >
+          Отменить
+        </button>
+
+        @if (id) {
+        <button
+          appearance="accent"
+          tuiButton
+          type="button"
+          class="form-button"
+          (click)="delete()"
+          [loading]="loading()"
+        >
+          Удалить
+        </button>
+        }
+      </div>
+    </form>
+  </div>
+</div>

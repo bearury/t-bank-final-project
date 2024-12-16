@@ -1,0 +1,14 @@
+<div class="group">
+  <div class="dialog">
+    <img
+      [ngSrc]="'/svg/dialog.svg' | tuiIcon"
+      [style.height.px]="130"
+      [style.width.px]="250"
+      alt="icon"
+      class="svg"
+      fill
+    />
+    <span>{{ title() }}</span>
+  </div>
+  <img [ngSrc]="image" alt="icon" class="image" height="188" priority width="168">
+</div>

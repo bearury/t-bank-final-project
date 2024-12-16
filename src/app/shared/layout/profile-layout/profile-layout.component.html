@@ -1,0 +1,21 @@
+@if (!isAdmin()) {
+<tui-segmented class="navigation">
+  <a
+    routerLinkActive
+    [routerLinkActiveOptions]="options"
+    [routerLink]="'/profile'"
+  >
+    Профиль
+  </a>
+
+  <a
+    routerLinkActive
+    [routerLinkActiveOptions]="options"
+    [routerLink]="'/profile/homework'"
+  >
+    Задания
+  </a>
+</tui-segmented>
+} @else { }
+
+<router-outlet></router-outlet>

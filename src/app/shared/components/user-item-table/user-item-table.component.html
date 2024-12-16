@@ -1,0 +1,71 @@
+<tr class="row-item">
+  <td tuiTd>
+    <div tuiCell="m">
+      <tui-avatar
+        [src]="item().avatar.length ? item().avatar : (item().name | tuiInitials)"
+        [style.background]="item().name | tuiAutoColor"
+      />
+      <span tuiTitle>
+        {{ item().name }}<span tuiSubtitle>{{ item().surname }}</span>
+      </span>
+    </div>
+  </td>
+  <td tuiTd>
+    <div tuiCell="m">{{ item().email }}</div>
+  </td>
+  <td tuiTd>
+    <div class="badges">
+      @for (course of item().courses; track course; let index = $index) {
+        <tui-badge [appearance]="setColor(index)" style="padding: .5rem">
+          {{ course | transformCourseToName : courses() }}
+        </tui-badge>
+      }
+    </div>
+  </td>
+  <td tuiTd>
+    {{ item().phone }}
+  </td>
+  <td tuiTd>
+    @if (item().uid === auth.currentUser?.uid) {
+      <tui-badge
+        appearance="positive"
+        class="role-current-item"
+        [tuiStatus]="item().role | roleUserToColor"
+        [tuiHint]="tooltip"
+        tuiHintAppearance="error"
+      >
+        <span>{{ item().role | roleUserToName }}</span>
+      </tui-badge>
+    } @else {
+      <tui-select
+        [formControl]="form.controls.role!"
+        [valueContent]="selectContent"
+      >
+        <tui-data-list *tuiDataList>
+          <button
+            *ngFor="let roleItem of roleItems"
+            tuiOption
+            type="button"
+            [value]="roleItem"
+            (click)="handleChangeRole.emit({ uid: item().uid, roleItem})"
+          >
+            <span [tuiStatus]="roleItem.name | roleUserToColor">{{ roleItem.name | roleUserToName }}</span>
+          </button>
+        </tui-data-list>
+      </tui-select>
+    }
+  </td>
+</tr>
+
+
+<ng-template #tooltip>
+  <div>Роль администратора</div>
+  <span>изменить </span>
+  <strong>нельзя!</strong>
+</ng-template>
+
+<ng-template #selectContent let-role>
+  <div [tuiSkeleton]="loadingChangeRole()" class="account" tuiCell="l">
+    <span [tuiStatus]="role.name | roleUserToColor">{{ role.name | roleUserToName }}</span>
+  </div>
+</ng-template>

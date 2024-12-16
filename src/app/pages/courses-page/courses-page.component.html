@@ -1,0 +1,26 @@
+@if (isLoading$ | async) {
+  <div class="loader">
+    <tui-loader size="xxl" />
+  </div>
+} @else {
+  <div class="title container">
+    <h1 tuiTitle="m">Курсы:</h1>
+  </div>
+  <div class="wrapper container">
+    @for (course of courses(); track course.uid) {
+      <div class="wrapper-card">
+        <app-card-course [course]="course" [currentUser]="currentUser() ?? null" />
+      </div>
+    }
+  </div>
+  @if (currentUser()?.role === 'admin') {
+    <div class="button-wrapper">
+      <a routerLink="/courses/create">
+        <button tuiButton iconStart="@tui.plus" appearance="flat">Добавить курс</button>
+      </a>
+    </div>
+  }
+}
+
+
+

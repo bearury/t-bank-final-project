@@ -1,0 +1,32 @@
+image: node:20
+
+# Functions that should be executed before the build script is run
+before_script:
+  - npm ci
+  - npm install -g nx
+
+stages:
+  - lint_and_test
+  - deploy
+
+lint_test:
+  stage: lint_and_test
+  script:
+    - npx eslint src 
+    - nx test --skip-nx-cache
+  only:
+    - branches
+
+pages:
+  stage: deploy
+  script:
+    - nx build --skip-nx-cache
+    - mkdir -p public 
+    - cp -r dist/FinalProject/browser/* public/
+  artifacts:
+    paths:
+      - public
+  rules:
+    # This ensures that only pushes to the 'develop' branch will trigger
+    # a pages deploy
+    - if: $CI_COMMIT_REF_NAME == "develop"

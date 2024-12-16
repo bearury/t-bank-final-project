@@ -1,0 +1,274 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  flex-direction: column;
+  height: 100%;
+  font-size: 2rem;
+}
+.wrapper {
+  display: flex;
+  gap: 25px;
+}
+.about-text {
+  font-size: 1.6rem;
+  line-height: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.profile_header {
+  min-width: 540px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+}
+.alert {
+  background: var(--app-txt-error);
+}
+
+.block {
+  border-radius: 15px;
+  background: var(--app-bg-primary);
+}
+.div__header-hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 21px;
+}
+.profile-title {
+  padding: 20px 20px 60px 30px;
+}
+.profile_header-avatar {
+  border-radius: 100%;
+  width: 16.25rem;
+  height: 16.25rem;
+  object-fit: cover;
+  object-position: center;
+}
+.profile__header-name {
+  font-size: 2.1rem;
+}
+.profile__header-contacts {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.profile__courses {
+  position: relative;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 400px;
+  gap: 30px;
+}
+.profile__courses-title {
+  padding-bottom: 10px;
+  padding-top: 30px;
+}
+.profile__courses-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.profile__courses-container_item {
+  font-size: 1.7rem;
+}
+.change-button {
+  font-size: 2rem;
+  justify-self: end;
+}
+
+.logout {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+}
+::ng-deep .t-heading {
+  padding-bottom: 10px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 1150px) {
+  .profile_header {
+    min-width: fit-content;
+  }
+  :host {
+    font-size: 1.7rem;
+  }
+}
+
+@media screen and (max-width: 1080px) {
+  .about-text {
+    font-size: 1.3rem;
+  }
+  :host {
+    font-size: 1.7rem;
+  }
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+  .profile__courses {
+    position: relative;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: fit-content;
+    gap: 20px;
+    min-width: 400px;
+    gap: 30px;
+  }
+  .profile__courses-title {
+    padding-top: 10px;
+    padding-bottom: 30px;
+  }
+  .profile__courses {
+    position: static;
+  }
+  .wrapper {
+    position: relative;
+  }
+  .change-button {
+    margin-top: 20px;
+    font-size: 1.7rem;
+    justify-self: end;
+  }
+  .logout {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+}
+
+@media screen and (max-width: 546px) {
+  :host {
+    font-size: 1.4rem;
+  }
+  .wrapper {
+    gap: 0px;
+  }
+  .profile__header-name {
+    font-size: 1.8rem;
+  }
+  .profile__courses-container_item {
+    font-size: 1.5rem;
+  }
+  .loader {
+    position: fixed;
+    top: 50%;
+    right: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+  }
+  .block {
+    border-radius: 0px;
+  }
+  .change-button {
+    margin-top: 15px;
+    font-size: 1.5rem;
+  }
+  .profile__header-contacts {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+  }
+  .profile_header {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+  }
+  .div__header-hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 12px;
+  }
+  .profile_header-avatar {
+    border-radius: 100%;
+    width: 8rem;
+    height: 8rem;
+  }
+  .logout {
+    width: 20px;
+    height: 20px;
+  }
+  .profile-title {
+    padding: 20px 20px 30px 30px;
+    font-size: 2.5rem;
+  }
+}
+
+@media screen and (max-width: 421px) {
+  :host {
+    padding: 5px;
+    font-size: 1rem;
+  }
+  .change-button {
+    margin-top: 15px;
+    font-size: 1.3rem;
+    justify-self: end;
+  }
+  .profile__header-name {
+    font-size: 1.4rem;
+  }
+  .profile__courses-container_item {
+    font-size: 1.3rem;
+  }
+  .profile__courses {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: fit-content;
+    gap: 20px;
+    min-width: 200px;
+  }
+  .profile_header {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+  }
+  .profile__courses-title {
+    padding-bottom: 0px;
+  }
+}

@@ -1,0 +1,100 @@
+:host {
+  display: block;
+}
+
+.task {
+  padding: 60px 0;
+  font-size: 18px;
+}
+
+.link-back {
+  color: var(--tui-text-secondary);
+  font-size: 16px;
+}
+
+.task-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+.task-name {
+  display: flex;
+  align-items: flex-start;
+}
+
+.task-status {
+  margin-right: 10px;
+}
+
+.task-title {
+  margin-bottom: 15px;
+  line-height: 1;
+}
+
+.task-edit {
+  margin-top: 20px;
+}
+
+.avatar {
+  margin-right: 5px;
+}
+
+.task-answer-field {
+  margin-bottom: 30px;
+}
+
+.task-review-field {
+  margin-bottom: 30px;
+}
+
+.loader {
+  flex: 1;
+}
+
+.more {
+  color: var(--tui-text-action);
+
+  &:focus {
+      color: var(--tui-text-action-hover);
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .task {
+    padding: 30px 0;
+    font-size: 14px;
+  }
+
+  .link-back {
+    font-size: inherit;
+  }
+
+  .task-info {
+    flex-direction: column;
+  }
+
+  .task-text {
+    order: 2;
+  }
+
+  .task-image {
+    order: 1;
+    margin-bottom: 20px;
+    align-self: center;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .task-answer-field {
+    margin-bottom: 20px;
+  }
+
+  .task-review-field {
+    margin-bottom: 20px;
+  }
+}

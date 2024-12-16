@@ -1,0 +1,38 @@
+@if(teacher$ | async; as teacher) {
+<div class="teacher__hero">
+  <tui-avatar class="tui-avatar" [src]="teacher.avatar | showImage">
+  </tui-avatar>
+  <h3>{{ teacher.name | titlecase }} {{ teacher.surname | titlecase }}</h3>
+  <div class="teacher__stack">
+    <p class="teacher__stack-text">курсы:</p>
+    <div class="teacher__stack-items">
+      @for(courseID of teacher.courses; track $index) {
+      <a
+        [routerLink]="['/courses/' + courseID]"
+        routerLinkActive="router-link-active"
+      >
+        <tui-badge style="padding: 1rem" [appearance]="setColorBadge(courseID)">
+          {{ courseID | transformCourseToName : courses() }}
+        </tui-badge>
+      </a>
+      }
+    </div>
+  </div>
+</div>
+
+<div class="description">
+  <h3>Обо мне:</h3>
+  <p>
+    {{ teacher.description }}
+  </p>
+</div>
+
+<tui-loader
+  size="xl"
+  class="loader"
+  [inheritColor]="true"
+  [overlay]="true"
+  [showLoader]="loader()"
+>
+</tui-loader>
+}

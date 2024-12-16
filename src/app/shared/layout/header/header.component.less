@@ -1,0 +1,198 @@
+@import '@taiga-ui/core/styles/taiga-ui-local.less';
+
+.header {
+  font-size: 14px;
+  font-weight: 500;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 99;
+  height: 100px;
+  padding-top: 18px;
+  
+  &.scrolled {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.header-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-nav {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+
+.header-logo {
+  max-width: 83px;
+  padding-bottom: 18px;
+  margin-right: 43px;
+}
+
+.header-menu-items {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.header-menu-item-link {
+  display: flex;
+  align-items: flex-start;
+  padding: 0 20px 36px;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-bottom: 4px solid transparent;
+
+  &.active {
+    border-image: linear-gradient(to right, #F7941D, #27AAE1) 100% 0;
+  }
+}
+
+.header-menu-item-link-text, .header-menu-bar-item-link-text {
+  min-height: 24px;
+
+  &:nth-child(2) {
+    margin-left: 6px;
+  }
+}
+
+.svg {
+  width: 20px;
+  height: 20px;
+}
+
+.menu-button {
+  display: none;
+}
+
+.header-account {
+  padding-bottom: 25px;
+}
+
+.header-account-link {
+  display: flex;
+  align-items: center;
+
+  span {
+    margin-left: 8px;
+  }
+}
+
+.header-menu-bar {
+  position: fixed;
+  top: 60px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background-color: var(--app-bg-light);
+  padding: 33px 10px 55px;
+  font-size: 16px;
+  font-weight: 500;
+  transition: transform .3s ease;
+  transform: translateX(100%);
+
+  &.open {
+    transform: translateX(0);
+  }
+}
+
+.header-menu-bar-nav {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(3, 1fr);
+  gap: 10px;
+  height: 100%;
+}
+
+.header-menu-bar-items, .header-menu-bar-account-items {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.header-menu-bar-item, .header-menu-bar-account-item {
+  margin-bottom: 20px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.header-menu-contacts {
+  align-self: self-end;
+}
+
+button {
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+  font: inherit;
+}
+
+[tuiIconButton][tuiIcons]:after {
+  font-size: 2rem;
+}
+
+ul {
+  list-style: none;
+}
+
+[tuiAppearance][data-appearance='account'] {
+  color: inherit;
+  background: transparent;
+  padding: 0 0 0 6px;
+  height: auto;
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+  justify-content: flex-end;
+
+  --tui-border-focus: transparent;
+}
+
+tui-data-list[data-size=l], tui-data-list[data-size=l] [tuiOption] {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    position: fixed;
+    padding-top: 10px;
+    height: 60px;
+  }
+
+  .header-container {
+    display: block;
+  }
+
+  .header-nav {
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .header-logo {
+    max-width: 57px;
+    padding-bottom: 10px;
+  }
+
+  .header-menu {
+    display: none;
+  }
+
+  .menu-button {
+    display: block;
+  }
+
+  .header-account {
+    display: none;
+  }
+}

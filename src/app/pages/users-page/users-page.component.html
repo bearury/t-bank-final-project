@@ -1,0 +1,71 @@
+<div class="container">
+  @if (loadingUsers()) {
+    <div class="control" [formGroup]="formFilter">
+      <tui-input
+        [formControl]="formFilter.controls.name"
+        [tuiTextfieldCleaner]="true"
+        class="find-input"
+      >
+        Имя пользователя
+      </tui-input>
+      <tui-multi-select
+        [formControl]="formFilter.controls.courses"
+        [stringify]="getNameFromCourse"
+        [tuiTextfieldCleaner]="true"
+        [tuiTextfieldLabelOutside]="true"
+        class="find-select"
+        placeholder="Добавить курс"
+        size="s"
+      >
+        Фильтрация по курсам
+        <tui-data-list-wrapper
+          *tuiDataList
+          [itemContent]="itemContent"
+          [items]="courses()"
+          tuiMultiSelectGroup
+        />
+      </tui-multi-select>
+    </div>
+  }
+  <div class="wrapper">
+    @if (loadingUsers()) {
+      <table class="table" tuiTable>
+        <thead class="table-head">
+        <tr>
+          <th tuiTh>Пользователь</th>
+          <th [style.width.rem]="10" tuiTh>Электронная почта</th>
+          <th tuiTh class="courses-row">Состоит в курсах</th>
+          <th tuiTh>Телефон</th>
+          <th tuiTh class="role-row">Роль</th>
+        </tr>
+        </thead>
+
+        <tbody tuiTbody>
+          @if ((users() | filterUsers: formFilter.value).length) {
+            @for (item of users() | filterUsers: formFilter.value; track item.uid) {
+              <app-user-item-table [item]="item" [courses]="courses()" (handleChangeRole)="onSelectRole($event)" />
+            }
+          } @else {
+            <tr>
+              <td colspan="5">
+                <div class="error-message">
+                  Пользователи не найдены
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    } @else {
+      <div class="loader">
+        <tui-loader size="xxl" />
+      </div>
+    }
+  </div>
+</div>
+
+<ng-template #itemContent let-data>
+  <div class="template">
+    {{ data.name }}
+  </div>
+</ng-template>

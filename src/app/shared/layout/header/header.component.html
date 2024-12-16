@@ -1,0 +1,183 @@
+@if (theme$ | async; as theme) {
+<div
+  class="header"
+  [class.scrolled]="isScrolled"
+  [style]="{ backgroundColor: theme.backgroundColor, color: theme.color }"
+>
+  <div class="container header-container">
+    <div class="header-nav" tuiNavigationHeader>
+      <div class="header-logo">
+        <a routerLink="/" class="link logo-link">
+          <img [src]="theme.logo" alt="logo" class="logo-img" />
+        </a>
+      </div>
+
+      <nav class="header-menu">
+        <ul class="header-menu-items">
+          <li>
+            <a
+              routerLink="/courses"
+              routerLinkActive="active"
+              class="link header-menu-item-link"
+            >
+              <tui-icon
+                icon="@tui.between-horizontal-start"
+                [style.color]="theme.color"
+              />
+              <span class="header-menu-item-link-text">Все курсы</span>
+            </a>
+          </li>
+          <li>
+            <a
+              routerLink="/teachers"
+              routerLinkActive="active"
+              class="link header-menu-item-link"
+            >
+              <span class="header-menu-item-link-text">Все преподаватели</span>
+            </a>
+          </li>
+          @if (isAdmin) {
+          <li>
+            <a
+              routerLink="/admin"
+              routerLinkActive="active"
+              class="link header-menu-item-link"
+            >
+              <span class="header-menu-item-link-text">Администратор</span>
+            </a>
+          </li>
+          }
+        </ul>
+      </nav>
+
+      <div class="menu-button">
+        <button
+          title="Menu"
+          appearance="account"
+          [style.--t-icon-end]="
+            'url(assets/taiga-ui/icons/' +
+            (isMenuOpened ? 'x.svg)' : 'align-justify.svg)')
+          "
+          tuiIconButton
+          type="button"
+          (click)="toggleMenu()"
+        ></button>
+      </div>
+    </div>
+
+    <div class="header-account">
+      @if (user$ | async; as user) {
+      <button
+        size="m"
+        appearance="account"
+        tuiChevron
+        tuiButton
+        type="button"
+        [tuiDropdown]="dropdown"
+        [tuiDropdownAlign]="'right'"
+        [(tuiDropdownOpen)]="isProfileDropdownOpened"
+      >
+        <tui-avatar
+          [size]="'xs'"
+          [src]="user['avatar'] | tuiFallbackSrc : '@tui.user' | async"
+          [style]="{
+            backgroundColor: theme.color,
+            color: theme.backgroundColor
+          }"
+        />
+        {{ user['name'] }}
+      </button>
+      <ng-template #dropdown>
+        <tui-data-list size="l">
+          <a tuiOption routerLink="/profile" (click)="closeDropdown()">
+            Профиль
+          </a>
+          <button tuiOption (click)="logout()">Выйти</button>
+        </tui-data-list>
+      </ng-template>
+      } @else {
+      <a routerLink="/login" class="link header-account-link">
+        <tui-avatar
+          [size]="'xs'"
+          [src]="'@tui.user'"
+          [style]="{
+            backgroundColor: theme.color,
+            color: theme.backgroundColor
+          }"
+        />
+        <span>Войти</span>
+      </a>
+      }
+    </div>
+  </div>
+</div>
+
+<div class="header-menu-bar" [class.open]="isMenuOpened">
+  <nav class="header-menu-bar-nav">
+    <ul class="header-menu-bar-items">
+      <li class="header-menu-bar-item">
+        <a routerLink="/courses" class="link" (click)="closeMenu()">
+          <tui-icon
+            icon="@tui.between-horizontal-start"
+            [style.color]="'var(--app-txt-primary)'"
+          />
+          <span class="header-menu-bar-item-link-text">Все курсы</span>
+        </a>
+      </li>
+      <li class="header-menu-bar-item">
+        <a routerLink="/teachers" class="link" (click)="closeMenu()">
+          <span>Все преподаватели</span>
+        </a>
+      </li>
+      @if (isAdmin) {
+      <li class="header-menu-bar-item">
+        <a routerLink="/admin" class="link" (click)="closeMenu()">
+          <span>Администратор</span>
+        </a>
+      </li>
+      }
+    </ul>
+
+    @if (user$ | async; as user) {
+    <ul class="header-menu-bar-account-items">
+      <li class="header-menu-bar-account-item">
+        <a
+          routerLink="/profile"
+          (click)="closeMenu()"
+          class="link header-account-link"
+        >
+          <tui-avatar
+            [size]="'xs'"
+            [src]="user['avatar'] | tuiFallbackSrc : '@tui.user' | async"
+          />
+          <span>{{ user['name'] }}</span>
+        </a>
+      </li>
+      <li class="header-menu-bar-account-item">
+        <button (click)="logout()" class="button" role="button">Выйти</button>
+      </li>
+    </ul>
+    } @else {
+    <a
+      routerLink="/login"
+      class="link header-account-link"
+      (click)="closeMenu()"
+    >
+      <tui-avatar
+        [size]="'xs'"
+        src="@tui.user"
+        [style]="{
+          backgroundColor: 'var(--app-bg-dark)',
+          color: 'var(--app-txt-light)'
+        }"
+      />
+      <span>Войти</span>
+    </a>
+    }
+
+    <div class="header-menu-contacts">
+      <app-contacts></app-contacts>
+    </div>
+  </nav>
+</div>
+}

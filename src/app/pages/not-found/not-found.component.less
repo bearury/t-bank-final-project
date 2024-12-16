@@ -1,0 +1,53 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.gradient {
+  font-size: inherit;
+  font-family: sans-serif;
+  fill-opacity: 0;
+  font-weight: bold;
+  stroke-width: 3;
+  stroke: url(#linear);
+  dominant-baseline: text-before-edge;
+  text-anchor: start;
+}
+
+.statistics-card-value {
+  font-weight: 700;
+  font-size: 128px;
+  letter-spacing: 0.1em;
+}
+
+.statistics-card-value-svg {
+  height: 150px;
+  width: 250px;
+}
+
+
+.statistics-card-units {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 170%;
+}
+
+@media screen and (max-width: 800px) {
+  .statistics-card-value {
+    font-size: 64px;
+  }
+
+  .statistics-card-value-svg {
+    height: 74px;
+    width: 7.8rem;
+  }
+
+  .statistics-card-units {
+    font-size: 18px;
+    line-height: 189%;
+  }
+}

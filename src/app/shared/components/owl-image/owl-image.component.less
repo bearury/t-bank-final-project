@@ -1,0 +1,49 @@
+
+.dialog {
+  position: relative;
+  margin-left: 4rem;
+  padding: .5rem;
+  width: 15rem;
+  height: 8.125rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  span {
+    display: inline-block;
+    font-size: 1rem;
+    margin-left: 0.3rem;
+    width: 15rem;
+    max-width: 15rem;
+    z-index: 1;
+    font-weight: 700;
+  }
+}
+
+
+.svg {
+  z-index: -1;
+}
+
+.image {
+  z-index: -2;
+  margin-top: -1.25rem;
+}
+
+
+@media screen and (max-width: 800px) {
+  .image {
+    max-height: 8.75rem;
+    max-width: 7.5rem;
+  }
+
+  .dialog {
+    margin-left: 1rem;
+    overflow: hidden;
+    width: 100%;
+
+    span {
+      font-size: .8rem;
+    }
+  }
+}
