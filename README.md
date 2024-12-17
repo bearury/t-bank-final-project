@@ -12,7 +12,7 @@
 
 ### 🎖️ 3. Карпов Антон
 
-## 👁️‍🗨️ <span style="color: #44c596;">Деплой проекта доступен по [ссылке](https://fintech-js-autumn-2024.edu-gitlab.ru/Homeworks/course-work/course-work-MarinaYurijAnton/)</span>
+## 👁️‍🗨️ <span style="color: #44c596;">Деплой проекта доступен по [ссылке](https://future-academy-t-bank.netlify.app/)</span>
 
 ## 🚀 <span style="color: #dd4c1e;">Запуск</span>
 
