@@ -19,13 +19,13 @@
 #### Клонирование проекта
 
 ```sh
-git clone git@gitlab.education.tbank.ru:fintech-js-autumn-2024/Homeworks/course-work/course-work-MarinaYurijAnton.git
+git clone git@github.com:bearury/t-bank-final-project.git
 ```
 
 #### Установка зависимостей
 
 ```sh
-cd course-work-MarinaYurijAnton
+cd t-bank-final-project
 npm install
 ```
 
