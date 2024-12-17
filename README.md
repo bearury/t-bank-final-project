@@ -12,20 +12,20 @@
 
 ### 🎖️ 3. Карпов Антон
 
-## 👁️‍🗨️ <span style="color: #44c596;">Деплой проекта доступен по [ссылке](https://fintech-js-autumn-2024.edu-gitlab.ru/Homeworks/course-work/course-work-MarinaYurijAnton/)</span>
+## 👁️‍🗨️ <span style="color: #44c596;">Деплой проекта доступен по [ссылке](https://future-academy-t-bank.netlify.app/)</span>
 
 ## 🚀 <span style="color: #dd4c1e;">Запуск</span>
 
 #### Клонирование проекта
 
 ```sh
-git clone git@gitlab.education.tbank.ru:fintech-js-autumn-2024/Homeworks/course-work/course-work-MarinaYurijAnton.git
+git clone git@github.com:bearury/t-bank-final-project.git
 ```
 
 #### Установка зависимостей
 
 ```sh
-cd course-work-MarinaYurijAnton
+cd t-bank-final-project
 npm install
 ```
 
