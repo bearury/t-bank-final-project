@@ -12,7 +12,7 @@
       "outputs": ["{options.outputPath}"],
       "options": {
         "sourceMap": true,
-        "outputPath": "dist/FinalProject",
+        "outputPath": ".github/workflows/dist",
         "index": "./src/index.html",
         "browser": "./src/main.ts",
         "polyfills": ["zone.js"],
